@@ -112,7 +112,7 @@ This project is a **React** application demonstrating a minimal, Google-like **s
 - **Arrow keys** let you navigate suggestions; press **Enter** to select.
 - **Mouse** can click a suggestion or use the **Cancel** icon to clear the input.
 - **Voice search** (mic icon) uses the **Web Speech API** if available (Chrome/Edge).
-- **Search results** appear on a “Results” page (if implemented), showing how many items matched and how long it took.
+- **Search results** showing how many items matched and how long it took.
 
 ---
 
@@ -129,7 +129,6 @@ This project is a **React** application demonstrating a minimal, Google-like **s
 
 - **Web Speech API** is best supported in **Chrome** or **Chromium-based** browsers. Safari/Firefox don’t fully support it.
 - The sample data is in [`localDB.ts`](./src/data/localDB.ts). You can replace it with a real API or use your own data.
-- **Arrow-key** and **hover** share a single index (`highlightedIndex`). If you move the mouse after using arrow keys, the highlight changes accordingly.
 
 ---
 
