@@ -55,8 +55,11 @@ This project is a **React** application demonstrating a minimal, Google-like **s
     │   │   ├─ SearchBar.tsx
     │   │   ├─ AutocompleteList.tsx
     │   │   ├─ VoiceSearch.tsx
-    │   │   ├─ IconWrapper.tsx
-    │   │   └─ SearchResultsList.tsx
+    │   │   ├─ SearchResultsList.tsx
+    │   │   └─ IconWrapper/
+    |   |       ├─ IconWrapper.tsx
+    |   |       ├─ mapTypeToIcon.ts
+    |   |       └─ index.ts
     │   ├─ context/
     │   │   └─ SearchContext.tsx
     │   ├─ hooks/
