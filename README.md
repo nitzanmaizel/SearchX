@@ -42,7 +42,7 @@ This project is a **React** application demonstrating a minimal, Google-like **s
    - Previously searched items appear **first** in suggestions.
 
 6. **Arrow-Key + Hover**
-   - Single `highlightedIndex` handles both arrow and mouse hover.
+   - handles both arrows and mouse hover.
    - Press Enter to select the highlighted suggestion; otherwise uses typed text.
 
 ---
