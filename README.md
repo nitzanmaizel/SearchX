@@ -47,9 +47,8 @@ This project is a **React** application demonstrating a minimal, Google-like **s
 
 ---
 
-## Project Structure (Example)
+## Project Structure
 
-    .
     ├─ src/
     │   ├─ components/
     │   │   ├─ SearchBar.tsx
