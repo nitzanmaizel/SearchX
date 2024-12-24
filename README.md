@@ -4,9 +4,9 @@ This project is a **React** application demonstrating a minimal, Google-like **s
 
 - **Autocomplete** suggestions
 - **Search history** (items appear at the top if previously searched)
-- **Voice search** using the native Web Speech API (optional)
+- **Voice search** using the native Web Speech API
 - **Arrow-key navigation** for autocomplete
-- **Context-based** state management (shared across pages/components)
+- **Context-based** state management
 
 ---
 
