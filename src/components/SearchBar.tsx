@@ -94,6 +94,7 @@ const SearchBar: React.FC = () => {
 
   const handleVoiceResult = (text: string) => {
     if (!text) return;
+    isSearchingRef.current = false;
     setSearchText(text);
     setShowAutocomplete(true);
     setActiveIndex(-1);

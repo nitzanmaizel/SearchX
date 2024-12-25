@@ -13,6 +13,11 @@ const SearchResultsList: React.FC = () => {
           </p>
         </div>
       )}
+      {searchResults.length === 0 && (
+        <div className='no-results'>
+          <p>No results found</p>
+        </div>
+      )}
       <ul>
         {searchResults.length > 0 &&
           searchResults.map((result) => (
