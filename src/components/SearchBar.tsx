@@ -3,6 +3,7 @@ import { useSearch } from '@/hooks/useSearch';
 import AutocompleteList from '@/components/AutocompleteList';
 import VoiceSearch from '@/components/VoiceSearch';
 import IconWrapper from '@/components/IconWrapper';
+import useDebounce from '@/hooks/useDebounce';
 
 const SearchBar: React.FC = () => {
   const { searchText, setSearchText, autocompleteItems, updateAutocomplete, searchItems } =
@@ -12,21 +13,34 @@ const SearchBar: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(-1);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const isSearchingRef = useRef<boolean>(false);
+
+  const debouncedSearchText = useDebounce(searchText, 500);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
+  useEffect(() => {
+    if (debouncedSearchText && !isSearchingRef.current) {
+      updateAutocomplete(debouncedSearchText);
+      setShowAutocomplete(true);
+    } else {
+      setShowAutocomplete(false);
+      setActiveIndex(-1);
+    }
+  }, [debouncedSearchText, updateAutocomplete]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    isSearchingRef.current = false;
     setSearchText(value);
-    updateAutocomplete(value);
-    setShowAutocomplete(!!value);
     setActiveIndex(-1);
   };
 
   const handleSearch = (value: string) => {
     if (!value) return;
+    isSearchingRef.current = true;
     searchItems(value);
     setShowAutocomplete(false);
     setActiveIndex(-1);
@@ -53,18 +67,12 @@ const SearchBar: React.FC = () => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       if (autocompleteItems.length > 0) {
-        setActiveIndex((prev) => {
-          const next = prev + 1;
-          return next >= autocompleteItems.length ? 0 : next;
-        });
+        setActiveIndex((prev) => (prev + 1) % autocompleteItems.length);
       }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (autocompleteItems.length > 0) {
-        setActiveIndex((prev) => {
-          const next = prev - 1;
-          return next < 0 ? autocompleteItems.length - 1 : next;
-        });
+        setActiveIndex((prev) => (prev - 1 < 0 ? autocompleteItems.length - 1 : prev - 1));
       }
     } else if (e.key === 'Enter') {
       e.preventDefault();
@@ -87,7 +95,6 @@ const SearchBar: React.FC = () => {
   const handleVoiceResult = (text: string) => {
     if (!text) return;
     setSearchText(text);
-    updateAutocomplete(text);
     setShowAutocomplete(true);
     setActiveIndex(-1);
   };
@@ -96,7 +103,7 @@ const SearchBar: React.FC = () => {
 
   return (
     <div style={{ position: 'relative' }}>
-      <div className={`searchX-box ${isActiveSearch ? 'active' : ''}`}>
+      <div className={`searchX-box ${isActiveSearch ? 'active' : ''}`} role='search'>
         <IconWrapper type='search' isDisabled />
         <input
           ref={inputRef}

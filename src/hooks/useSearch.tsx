@@ -3,7 +3,7 @@ import { SearchContext } from '@/context/SearchContext';
 
 const useSearch = () => {
   const context = useContext(SearchContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useSearch must be used within a SearchProvider');
   }
   return context;
